@@ -7,7 +7,7 @@ export const instance = axios.create({
   baseURL: `https://pre-onboarding-selection-task.shop`,
   headers: {
     "Content-Type": "application/json",
-    Authorization: ACCESS_TOKEN || "",
+    Authorization: ACCESS_TOKEN || null,
   },
 });
 

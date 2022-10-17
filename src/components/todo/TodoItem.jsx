@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import useInput from "../../hooks/useInput";
 
-const TodoItem = ({ todoItem, complete, remove, update }) => {
-  const { id, todo, isCompleted, userId } = todoItem;
+const TodoItem = ({ todoItem, remove, update }) => {
+  const { id, todo, isCompleted } = todoItem;
 
   const [isDone, setIsDone] = useState(isCompleted);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
