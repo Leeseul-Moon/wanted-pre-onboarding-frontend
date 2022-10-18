@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onLogin, onSignUp } from "../../apis/request";
+import styled from "styled-components";
 
 const LoginJoinForm = () => {
   const [signup, setSignup] = useState(false);
@@ -51,18 +52,39 @@ const LoginJoinForm = () => {
   };
 
   return (
-    <form className="auth-form" onSubmit={onSubmit}>
-      <input name="email" type="text" placeholder="Email" value={email} onChange={onChange} required />
-      <input name="password" type="password" placeholder="Password" value={password} onChange={onChange} />
-      <div>
-        <input name="signup" id="signup" type="checkbox" onChange={onChange} checked={signup} />
-        <label htmlFor="signup">아직 회원이 아니세요?</label>
-      </div>
-      <button type="submit" disabled={!email.includes("@") || password.length < 8}>
-        {signup ? "Sign Up" : "Sign In"}
-      </button>
-    </form>
+    <Container>
+      <Form onSubmit={onSubmit}>
+        <input name="email" type="text" placeholder="Email" value={email} onChange={onChange} required />
+        <input name="password" type="password" placeholder="Password" value={password} onChange={onChange} />
+        <div>
+          <input name="signup" id="signup" type="checkbox" onChange={onChange} checked={signup} />
+          <label htmlFor="signup">아직 회원이 아니세요?</label>
+        </div>
+        <button type="submit" disabled={!email.includes("@") || password.length < 8}>
+          {signup ? "Sign Up 🎉" : "Sign In →"}
+        </button>
+      </Form>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Form = styled.form`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  input {
+    margin-bottom: 0.4rem;
+  }
+  div {
+    margin-bottom: 0.7rem;
+  }
+`;
 
 export default LoginJoinForm;

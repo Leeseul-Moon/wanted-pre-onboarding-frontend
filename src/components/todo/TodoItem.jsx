@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useInput from "../../hooks/useInput";
+import styled from "styled-components";
 
 const TodoItem = ({ todoItem, remove, update }) => {
   const { id, todo, isCompleted } = todoItem;
@@ -27,23 +28,43 @@ const TodoItem = ({ todoItem, remove, update }) => {
   };
 
   return (
-    <div>
+    <Container>
       <input type="checkbox" checked={isDone} onChange={done} />
       {!isUpdateMode ? (
-        <div>
+        <>
           <span>{todo}</span>
-          <button onClick={updateMode}>수정</button>
-          <button onClick={deleteHandler}>삭제</button>
-        </div>
+          <div>
+            <button onClick={updateMode}>수정</button>
+            <button onClick={deleteHandler}>삭제</button>
+          </div>
+        </>
       ) : (
-        <div>
+        <>
           <input type="text" value={updatedTodo} onChange={inputHandler} />
-          <button onClick={updateHandler}>제출</button>
-          <button onClick={updateMode}>취소</button>
-        </div>
+          <div>
+            <button onClick={updateHandler}>제출</button>
+            <button onClick={updateMode}>취소</button>
+          </div>
+        </>
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 500px;
+  margin: 0.3rem;
+
+  span {
+    overflow: auto;
+  }
+
+  button {
+    margin: 0 0.1rem;
+  }
+`;
 
 export default TodoItem;
