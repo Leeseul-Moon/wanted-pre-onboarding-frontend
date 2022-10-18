@@ -9,13 +9,9 @@ const TodoList = () => {
   const [todoList, setTodoList] = useState();
   const [todo, inputHandler, setTodo] = useInput("");
 
-  const ACCESS_TOKEN = localStorage.getItem("accessToken");
-
   useEffect(() => {
-    if (ACCESS_TOKEN) {
-      getTodos();
-    }
-  }, [ACCESS_TOKEN]);
+    getTodos();
+  }, []);
 
   const getTodos = async () => {
     try {
