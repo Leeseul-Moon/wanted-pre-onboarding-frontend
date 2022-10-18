@@ -7,9 +7,22 @@ export const instance = axios.create({
   baseURL: `https://pre-onboarding-selection-task.shop`,
   headers: {
     "Content-Type": "application/json",
-    Authorization: ACCESS_TOKEN || null,
   },
 });
+
+instance.interceptors.request.use(
+  function (config) {
+    if (ACCESS_TOKEN) {
+      config.headers["Authorization"] = ACCESS_TOKEN;
+    } else {
+      config.headers["Authorization"] = localStorage.getItem("accessToken");
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 export const onSignUp = async (sendData) => {
   return await instance.post(`/auth/signup`, sendData);
